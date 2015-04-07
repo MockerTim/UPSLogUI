@@ -1,4 +1,4 @@
-package asu.gubkin.ru.shareddata;
+package asu.gubkin.ru.upslogui;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package asu.gubkin.ru.shareddata;
+package asu.gubkin.ru.upslogui;
 
 import android.app.Activity;
 import android.net.Uri;
