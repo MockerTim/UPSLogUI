@@ -1,19 +1,12 @@
 package asu.gubkin.ru.upslogui;
 
-import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,11 +18,19 @@ import com.dropbox.sync.android.DbxFileInfo;
 import com.dropbox.sync.android.DbxFileSystem;
 import com.dropbox.sync.android.DbxPath;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
- * Created by timur on 08.01.15.
+ * Created by timur on 08.04.15.
  */
 public class SettingsFragment extends Fragment {
     private static final String appKey = "mndotd21cnge6ko";//"p78hpiyefxd4p9z";
@@ -40,6 +41,8 @@ public class SettingsFragment extends Fragment {
     private TextView mTestOutput;
     private Button mLinkButton;
     private DbxAccountManager mDbxAcctMgr;
+
+    private TreeMap<Date, Integer> dateValueMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -140,6 +143,45 @@ public class SettingsFragment extends Fragment {
             } else if (dbxFs.isFolder(testPath)) {
                 mTestOutput.append("'" + testPath.toString() + "' is a folder.\n");
             }
+
+            DbxFile upsLogFile = dbxFs.open(new DbxPath("logups22"));
+            try {
+//                upsLogFile.writeString("Hello Dropbox!");
+                InputStream in = upsLogFile.getReadStream();
+
+                BufferedReader fIn = new BufferedReader(new InputStreamReader(in));
+
+                String lineStr;// = fIn.readLine();
+
+//                String upsLogJson = "{points: {";
+                dateValueMap = new TreeMap<>();
+
+                String pairStr;
+                while((lineStr = fIn.readLine()) != null) {
+                    pairStr = lineStr.substring(1, lineStr.lastIndexOf("]"));
+                    String[] pairArray = pairStr.split(", ");
+
+                    String someDateStr = pairArray[0].substring(1, pairArray[0].lastIndexOf("\""));
+//                    mTestOutput.setText("someDateStr: {" + someDateStr + "}");
+                    Integer someInt = Integer.parseInt(pairArray[1]);
+                    DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss z");
+                    Date someDate = (Date)formatter.parse(someDateStr);
+
+                    dateValueMap.put(someDate, someInt);
+                }
+
+                mTestOutput.setText("activity: " + getActivity());
+
+//                Intent intent = this.getActivity().getIntent();
+//
+//                intent.putExtra("ARRAY", dateValueMap);
+//
+//                startActivity(intent);
+            } finally {
+                upsLogFile.close();
+            }
+        } catch (ParseException e) {
+            mTestOutput.setText("Dropbox test failed: " + e);
         } catch (IOException e) {
             mTestOutput.setText("Dropbox test failed: " + e);
         }
