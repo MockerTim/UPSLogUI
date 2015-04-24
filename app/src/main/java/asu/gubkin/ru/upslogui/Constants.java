@@ -9,7 +9,10 @@ public interface Constants {
     /**
      * ADM log application tag
      */
-    String TAG = "UPSLogUI";
+    String TAG = "UPSTempLog";
+
+    String appKey = "mndotd21cnge6ko";//"p78hpiyefxd4p9z";
+    String appSecret = "jsfwbopus38tlhv";//"hwjzoa1qoxjoqft";
 
     /**
      * Debugging flag. Set to false to reduse the amount of application log messages in ADM

@@ -33,8 +33,6 @@ import java.util.TreeMap;
  * Created by timur on 08.04.15.
  */
 public class SettingsFragment extends Fragment {
-    private static final String appKey = "mndotd21cnge6ko";//"p78hpiyefxd4p9z";
-    private static final String appSecret = "jsfwbopus38tlhv";//"hwjzoa1qoxjoqft";
 
     private static final int REQUEST_LINK_TO_DBX = 0;
 
@@ -69,7 +67,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        mDbxAcctMgr = DbxAccountManager.getInstance(this.getActivity().getApplicationContext(), appKey, appSecret);
+        mDbxAcctMgr = DbxAccountManager.getInstance(this.getActivity().getApplicationContext(), Constants.appKey, Constants.appSecret);
 
         return rootView;
     }
@@ -78,7 +76,7 @@ public class SettingsFragment extends Fragment {
         super.onResume();
         if (mDbxAcctMgr.hasLinkedAccount()) {
             showLinkedView();
-            doDropboxTest();
+            doDropboxTest(mDbxAcctMgr);
         } else {
             showUnlinkedView();
         }
@@ -89,6 +87,9 @@ public class SettingsFragment extends Fragment {
         mTestOutput.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Отображает кнопку, при нажатии на которую, запускается процедура привязки аккаунта Dropbox.
+     */
     private void showUnlinkedView() {
         mLinkButton.setVisibility(View.VISIBLE);
         mTestOutput.setVisibility(View.GONE);
@@ -98,7 +99,7 @@ public class SettingsFragment extends Fragment {
         mDbxAcctMgr.startLink(this, REQUEST_LINK_TO_DBX);
     }
 
-    private void doDropboxTest() {
+    private void doDropboxTest(DbxAccountManager mDbxAcctMgr) {
         mTestOutput.setText("Dropbox Sync API Version " + DbxAccountManager.SDK_VERSION_NAME + "\n");
         try {
             final String TEST_DATA = "Hello Dropbox";
@@ -170,7 +171,7 @@ public class SettingsFragment extends Fragment {
                     dateValueMap.put(someDate, someInt);
                 }
 
-                mTestOutput.setText("activity: " + getActivity());
+//                mTestOutput.setText("activity: " + getActivity());
 
 //                Intent intent = this.getActivity().getIntent();
 //
