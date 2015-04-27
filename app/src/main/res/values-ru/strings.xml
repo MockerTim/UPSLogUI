@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UPSTempLog</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_update">Обновить</string>
+    <string name="link_button">Связать с Dropbox</string>
+    <string name="pref_ringtone_silent">Без звука</string>
+    <string name="pref_header_notifications">Уведомления</string>
+    <string name="pref_header_general">Общие</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="pref_title_vibrate">Вибрация</string>
+    <string name="pref_title_system_sync_settings">Частота системных обновлений</string>
+    <string name="pref_title_sync_frequency">Частота обновления</string>
+    <string name="pref_title_ringtone">Рингтон</string>
+    <string name="pref_title_new_message_notifications">Уведомления о новых сообщениях</string>
+    <string name="pref_title_display_name">Отображаемое наименование</string>
+    <string name="pref_title_add_friends_to_messages">Добавить друзей</string>
+    <string name="pref_title_social_recommendations">Разрешить общественные рекомендации</string>
+    <string name="pref_header_data_sync"></string>
+</resources>

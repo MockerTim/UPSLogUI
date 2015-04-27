@@ -1,27 +1,9 @@
 package asu.gubkin.ru.upslogui;
 
-import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
 import android.support.v7.app.ActionBarActivity;
-import android.text.TextUtils;
 import android.util.Log;
-
-
-import java.util.List;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -40,6 +22,8 @@ public class SettingsActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(Constants.D) Log.d(Constants.TAG, "[SettingsActivity.onCreate()]>");
+
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
@@ -47,9 +31,7 @@ public class SettingsActivity extends ActionBarActivity {
         // This two lines of code are mandatory to show app icon in the menubar on android 21
         // See http://stackoverflow.com/questions/26440279/show-icon-in-actionbar-toolbar-with-appcompat-v7-21
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setIcon(R.drawable.ic_launcher);
-
-        if(Constants.D) Log.d(Constants.TAG, "[SettingsActivity.onCreate()]>");
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         if(Constants.D) Log.d(Constants.TAG, "<[SettingsActivity.onCreate()]");
     }

@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">UPSTempLog</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_update">Update</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="link_button">Link to Dropbox</string>
 
     <!-- Default postal code for location preference [CHAR LIMIT=NONE] -->
